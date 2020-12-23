@@ -1,0 +1,79 @@
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+
+
+public class Bocik {
+
+	public static void main(String[] args) throws IOException, InterruptedException, AWTException{
+		// TODO Auto-generated method stub
+		Robot robot=new Robot();
+
+		
+		Color gray=new Color(28, 28, 34);
+		Color avatar=new Color(33,33,41);
+	
+		File file=new File("C:\\Users\\qaspa\\Desktop\\przykladowyplik.html");
+		Desktop deskop=Desktop.getDesktop();
+		deskop.open(file);
+		Thread.sleep(1300);
+		Color pixelcolor=robot.getPixelColor(1028, 97);
+		if (pixelcolor.equals(gray)==false) {
+			robot.keyPress(KeyEvent.VK_ALT);
+			robot.keyPress(KeyEvent.VK_SPACE);
+			robot.keyPress(KeyEvent.VK_S);
+			robot.keyRelease(KeyEvent.VK_ALT);
+			robot.keyRelease(KeyEvent.VK_SPACE);
+			robot.keyRelease(KeyEvent.VK_S);
+			Thread.sleep(2000);
+			
+		}
+		//wlaczenie strony
+		robot.mouseMove(329, 97);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(1300);
+		int i=0;
+		while (i!=1) {
+			pixelcolor=robot.getPixelColor(1028, 97);
+			if (pixelcolor.equals(gray)) {
+				Thread.sleep(200);
+				Color pixelcolor2=robot.getPixelColor(237, 350);
+				if (pixelcolor2.equals(avatar)) {
+					break;
+				}
+				else {
+				//train
+				robot.mouseMove(240, 349);
+				robot.mousePress(InputEvent.BUTTON1_MASK);
+				robot.mouseRelease(InputEvent.BUTTON1_MASK);
+				Thread.sleep(1500);
+				
+				//rewards 
+				robot.mouseMove(425, 148);
+				robot.mousePress(InputEvent.BUTTON1_MASK);
+				robot.mouseRelease(InputEvent.BUTTON1_MASK);		
+				Thread.sleep(1000);
+				
+				//daily reward
+				robot.mouseMove(853, 744);
+				robot.mousePress(InputEvent.BUTTON1_MASK);
+				robot.mouseRelease(InputEvent.BUTTON1_MASK);								
+				}
+				i++;
+			}
+		}
+		
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_W);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_W);
+		
+
+}
+}
