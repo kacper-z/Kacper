@@ -1,0 +1,41 @@
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+
+public class BOT {
+
+	public static void main(String[] args) throws AWTException, IOException, InterruptedException {
+		// Bot służący do automatycznego tworzenia dowolnej ilości sesji przeglądarek wraz z dołączeniem do gry
+		
+        Robot robot=new Robot();	
+        Color green=new Color(84, 200, 0); // kolor przycisku play
+        int t=5; //licznik ile botów ma pojawić się na serwerze
+        
+        for (int i=0;i<=t;i++) { //pętla odpowiedzialna za ilość powtórzeń
+		
+		
+        	File file=new File("C:\\Users\\qaspa\\Desktop\\przykladowyskrot.lnk"); //przypisanie do zmiennej pliku
+    		Desktop deskop=Desktop.getDesktop();
+    		deskop.open(file); // wejście na stronę 
+    		boolean czy=false;
+    		while (czy!=true) { //pętla odpowiedzialna za wejście do gry 
+    			Color pixelcolor=robot.getPixelColor(860, 370); //pobieranie koloru z miejsca gdzie powinien pojawic się przycisk
+    			if (green.equals(pixelcolor)) { //sprawdzenie czy przycisk play się pojawił (czy strona się już załadowała)
+    				robot.mouseMove(860	, 370); //ruch myszką na przycisk 
+    	    		robot.mousePress(InputEvent.BUTTON1_MASK); //naciśnięcie lewego przycisku myszy 
+    	    		robot.mouseRelease(InputEvent.BUTTON1_MASK); //zwolnienie lewego przycisku myszy 
+    	    		robot.mouseMove(300	, 300); // przesunięcie myszki (przycisk zmienia kolor po najechaniu, gdyby kursor był w tym samym miejscu potrzeba by było innego koloru
+    	    		czy=true; //pętla zakończona - wejście kolejnego bota na stronę
+    			}
+    		}
+    				
+        }
+		
+	}
+
+}
